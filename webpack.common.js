@@ -9,7 +9,7 @@ module.exports = {
     plugins: [
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
-        title: 'Caching'
+        title: 'webpack demo'
       })
     ],
     output: {
@@ -17,7 +17,7 @@ module.exports = {
       path: path.resolve(__dirname, 'dist')
   },
     module: {
-        // 这部分是loader 用来处理引入任何其他类型的文件.
+        // 这部分是 loader 用来处理引入任何其他类型的文件.
         rules: [
             // 处理 样式的loader
             {
@@ -27,16 +27,12 @@ module.exports = {
                     'css-loader'
                 ]
             },
-            // 处理图片资源
             {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: [
                     'file-loader'
                 ]
             },
-            {
-
-            }
         ]
     }
 };

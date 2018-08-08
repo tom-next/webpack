@@ -5,7 +5,7 @@ import printMe from './print.js';
 import { cube } from './math.js';
 
 if (process.env.NODE_ENV !== 'production') {
-    console.log("process", process)
+    console.log("process12121", process)
     console.log('Looks like we are in development mode!');
 }else {
     console.log("process", process)
