@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import './style.css';
 import Icon from './icon.png';
-import printMe from './print.js';
+// import printMe from './print.js';
 import { cube } from './math.js';
 
 if (process.env.NODE_ENV !== 'production') {
@@ -24,8 +24,9 @@ function component() {
     element.appendChild(myIcon);
 
     btn.innerHTML = 'Click me and check the console!';
-    btn.onclick = printMe;
+    // btn.onclick = printMe;
     element.appendChild(btn);
+    console.log("000000");
     return element;
 }
 // 问题： printMe 执行的不是最新我们更新的log。 这是因为按钮的onclick 仍然绑定在旧的 printMe 函数上。
