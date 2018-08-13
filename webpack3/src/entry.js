@@ -1,1 +1,2 @@
-document.getElementById('title').innerHTML = "Hello wewewtom"
+import css from "./css/index.css"
+document.getElementById('title').innerHTML = "Hello wewew tom"
