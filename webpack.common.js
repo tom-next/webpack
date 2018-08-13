@@ -17,7 +17,7 @@ module.exports = {
       }),
        new webpack.HashedModuleIdsPlugin(),   // 将第三方库(library)（例如 lodash 或 react）提取到单独的 vendor chunk 文件中，是比较推荐的做法，这是因为，它们很少像本地的源代码那样频繁修改。管再添加任何新的本地依赖，对于每次构建，vendor hash 都应该保持一致
       // new webpack.optimize.CommonsChunkPlugin({
-      //  name: 'lodash' // 指定公共 bundle 的名称。            // webpack 3中使用 阻止重复
+      //  name: 'lodash' // 指定公共 bundle 的名称。            // webpack 3中使用 阻止重复, 比如多个文件用到了 loadsh, 我们可以提取lodash 到公共部分，避免在每个文件中都打进去
       // })
     ],
     optimization: {
