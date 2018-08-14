@@ -3,7 +3,7 @@ body {
     color: white;
 }
 #tupian {
-    background-image: url(../images/demo.png);
+    background-image: url(localhost:8000/92a464303448970ed22b08477d7f6c91.png);
     width: 287px;
     height: 185px;
 }
