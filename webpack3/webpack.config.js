@@ -14,6 +14,8 @@ const extractTextPlugin = require("extract-text-webpack-plugin");
 const glob = require('glob');
 // 引入 purifycss-webpack
 const PurifyCSSPlugin = require("purifycss-webpack");
+const webpack = require("webpack")
+
 
 var website ={
     publicPath:"http://localhost:9000/"  // 这里是解决我们在打包的时候用extract-text-webpack-plugin插件很轻松的就把CSS文件分离了出来，但是CSS路径并不正确
@@ -100,7 +102,7 @@ module.exports = {
                 use:{
                     loader:'babel-loader',
                     // options:{
-                    //     presets:[                   // 增加 es6 支持,使用基于 js 进行了扩展的语言
+                    //     presets:[                   // 增加 es6 支持,使用基于 js 进行了扩展的语言, 一般会在项目中加上一个.babelrc文件来单独配置babel
                     //         "es2015","react"
                     //     ]
                     // }
@@ -111,7 +113,9 @@ module.exports = {
     },
     plugins:[
         // new uglify(),  // 只能在正式打包的时候用
-
+        new webpack.ProvidePlugin({
+            $: "jquery"     // 打包第三方库
+        }),
         new htmlPlugins({
             minify: {
                 removeAttributeQuotes: true // 让我们的html文件id里面的双引号都去掉，减少代码量

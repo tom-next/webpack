@@ -3,5 +3,5 @@ import less from './css/black.less';
 
 let w = "hello"
 const q = "#@42"
-
 document.getElementById('title').innerHTML = "Hello wewew tom"
+console.log($, $("#title")[0].innerHTML = "1213");
