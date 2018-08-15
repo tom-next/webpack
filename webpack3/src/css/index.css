@@ -6,4 +6,9 @@ body {
     background-image: url(../images/demo.png);
     width: 287px;
     height: 185px;
+    transform: rotate(45deg);
+}
+
+.ed {
+    background: red;
 }
