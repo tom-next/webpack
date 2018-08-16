@@ -15,7 +15,8 @@ const glob = require('glob');
 // 引入 purifycss-webpack
 const PurifyCSSPlugin = require("purifycss-webpack");
 const webpack = require("webpack")
-
+// 一些已经存在但在项目中没有引用的图片资源或者其他静态资源打包到指定的文件夹
+const copyWebpackPlugin= require("copy-webpack-plugin");
 
 var website ={
     publicPath:"http://localhost:9000/"  // 这里是解决我们在打包的时候用extract-text-webpack-plugin插件很轻松的就把CSS文件分离了出来，但是CSS路径并不正确
@@ -24,6 +25,8 @@ var website ={
 module.exports = {
     entry: {
         entry: './src/entry.js',
+        jquery: 'jquery',
+        vue:'vue',
     },
     output: {
         path: path.resolve(__dirname, "dist"),
@@ -113,8 +116,20 @@ module.exports = {
     },
     plugins:[
         // new uglify(),  // 只能在正式打包的时候用
+        new copyWebpackPlugin([{
+            from:__dirname+'/src/public',
+            to:'./public'
+        }]),
+        new webpack.optimize.CommonsChunkPlugin({
+            //name对应入口文件中的名字，我们起的是jQuery
+            name:['jquery', 'vue'],
+            //把文件打包到哪里，是一个路径                    // 这个插件的作用是将我们第三方库的包单独打出来，在entery 设置名称
+            filename:"assets/js/[name].js",
+            //最小打包的文件模块数，这里直接写2就好
+            minChunks:2     // 必须写，否则会报错
+        }),
         new webpack.ProvidePlugin({
-            $: "jquery"     // 打包第三方库
+            $: "jquery"     // 打包第三方库,全局都可以使用, 另外一种是在代码里通过 import 引入, 但这种是由于不管在代码使用没有只要引入都会打包。而通过全局这种，只有在使用的时候才会打包
         }),
         new htmlPlugins({
             minify: {
@@ -136,5 +151,13 @@ module.exports = {
         host: "localhost",
         compress: true,
         port: 9000
+    },
+    watchOptions:{
+        //检测修改的时间，以毫秒为单位
+        poll:1000,
+        //防止重复保存而发生重复编译错误。这里设置的500是半秒内重复保存，不进行打包操作
+        aggregateTimeout:500,
+        //不监听的目录
+        ignored:/node_modules/,
     }
 }
